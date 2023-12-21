@@ -17,8 +17,8 @@ export const MapView = () => {
     if (!isLoading) {
 
       const map = new mapboxgl.Map({
-        container: mapDiv.current!, // container ID
-        style: 'mapbox://styles/mapbox/light-v10', // style URL
+        container: mapDiv.current!, // container ID 
+        style: 'mapbox://styles/tirano61/ckgp6pq8t0iwa19qm0d4f4s7d', //'mapbox://styles/mapbox/light-v10', // style URL mapbox://styles/tirano61/ckgp6pq8t0iwa19qm0d4f4s7d
         center: userLocation, // starting position [lng, lat]
         zoom: 9 // starting zoom
       });

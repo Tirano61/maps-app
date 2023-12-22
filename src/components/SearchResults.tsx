@@ -5,11 +5,12 @@ import React, { useContext, useState } from 'react'
 import { MapContext, PlacesContext } from '../context'
 import { LoadingPlaces } from './LoadingPlaces';
 import { Feature } from '../interfaces/places';
+import { start } from 'repl';
 
 export const SearchResults = () => {
 
-  const { isLoadingPlaces, places } = useContext(PlacesContext);
-  const { map } = useContext(MapContext);
+  const { isLoadingPlaces, places, userLocation } = useContext(PlacesContext);
+  const { map, getRouteBetweenPoinds } = useContext(MapContext);
 
   const [activeId, setActiveId] = useState('');
 
@@ -21,6 +22,15 @@ export const SearchResults = () => {
       zoom: 14,
       center: [ lng, lat]
     })
+  }
+
+  const getRoute = ( place: Feature ) =>{
+
+    if ( !userLocation ) return;
+
+    const [ lng, lat ] = place.center;
+
+    getRouteBetweenPoinds( userLocation, [ lng, lat ] );
   }
 
   if ( isLoadingPlaces ) {
@@ -51,7 +61,10 @@ export const SearchResults = () => {
             >
               { place.place_name_es }
             </p>
-            <button className={`btn btn-sm ${(activeId === place.id) ? 'btn-outline-light' : 'btn-outline-primary'}`}>
+            <button 
+              onClick={ () => getRoute( place ) }
+              className={`btn btn-sm ${(activeId === place.id) ? 'btn-outline-light' : 'btn-outline-primary'}`}
+            >
               Direcciones
             </button>
           </li>

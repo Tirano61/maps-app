@@ -2,4 +2,6 @@
 
 
 
-export { default as searchApi} from "./searchApi";
+export {default as directionApi } from "./directionsApi";
+export { default as searchApi } from "./searchApi";
+
